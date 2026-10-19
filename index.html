@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b100f" />
+  <meta name="description" content="Deep Focus — Pomodoro cinematográfico com paisagens e sons ambientes." />
+  <title>Deep Focus — Encontre seu ritmo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <video id="sceneVideo" class="scene-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=85"></video>
+    <img id="sceneImage" class="scene-image" alt="" hidden>
+    <iframe id="youtubeBackground" class="scene-youtube" title="Vídeo de fundo do YouTube" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+    <div class="scene-fallback"></div>
+    <div class="scene-shade"></div>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Deep Focus início">
+      <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 24 13 8l5 9 3-5 7 12H4Z"/><path d="m9 24 7-9 7 9"/></svg></span>
+      <span><strong>DEEP FOCUS</strong><small>FIND YOUR STILLNESS</small></span>
+    </a>
+    <div class="top-actions">
+      <div class="live-pill"><span></span> SEU ESPAÇO DE FOCO</div>
+      <button class="icon-btn" id="fullscreenBtn" aria-label="Tela cheia" title="Tela cheia"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></svg></button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Configurações" title="Configurações"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.1 1.9-1.4-.5a7.9 7.9 0 0 1-1.5.9l-.2 1.5h-2.2l-.3-1.5a7.9 7.9 0 0 1-1.5-.9l-1.4.5-1.1-1.9 1.1-.9a7.5 7.5 0 0 1 0-1.8l-1.1-.9 1.1-1.9 1.4.5a7.9 7.9 0 0 1 1.5-.9l.3-1.5h2.2l.2 1.5a7.9 7.9 0 0 1 1.5.9l1.4-.5 1.1 1.9-1.1.9a7.5 7.5 0 0 1 0 1.8Z" transform="translate(-2 -2)"/></svg></button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="focus-column">
+      <div class="eyebrow"><span class="eyebrow-line"></span><span id="sceneEyebrow">REFÚGIO NAS MONTANHAS</span><span class="eyebrow-line"></span></div>
+      <div class="hero-copy"><h1>Encontre seu<br><em>ritmo.</em></h1><p>Um momento de cada vez. Deixe o mundo lá fora.</p></div>
+
+      <section class="timer-card" aria-label="Temporizador Pomodoro">
+        <div class="timer-tabs" role="tablist" aria-label="Modo do temporizador">
+          <button class="timer-tab active" data-mode="focus" role="tab" aria-selected="true">Foco</button>
+          <button class="timer-tab" data-mode="short" role="tab" aria-selected="false">Pausa curta</button>
+          <button class="timer-tab" data-mode="long" role="tab" aria-selected="false">Pausa longa</button>
+        </div>
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-status"><span class="status-dot"></span><span id="timerStatus">PRONTO PARA COMEÇAR</span></div>
+        <div class="timer-progress"><span id="progressBar"></span></div>
+        <div class="timer-controls">
+          <button class="control-ghost" id="resetBtn" aria-label="Reiniciar temporizador" title="Reiniciar"><svg viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.6 6.4M3 4v7h7"/></svg></button>
+          <button class="start-btn" id="startBtn"><svg id="startIcon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg><span id="startLabel">Começar foco</span></button>
+          <button class="control-ghost" id="skipBtn" aria-label="Próxima etapa" title="Próxima etapa"><svg viewBox="0 0 24 24"><path d="m5 5 10 7-10 7zM19 5v14"/></svg></button>
+        </div>
+        <div class="session-footer"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="sessionCount">0 sessões concluídas</span></span><span id="cycleLabel">CICLO 1 DE 4</span></div>
+      </section>
+
+      <div class="quote-line"><span class="quote-mark">“</span><span id="quoteText">A tranquilidade também é uma forma de progresso.</span></div>
+    </section>
+
+    <aside class="side-column">
+      <section class="glass-panel task-panel">
+        <div class="panel-heading"><div><span class="panel-kicker">SUA INTENÇÃO</span><h2>O que vamos realizar?</h2></div><span class="heading-icon"><svg viewBox="0 0 24 24"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span></div>
+        <input id="taskInput" class="task-input" maxlength="120" placeholder="Ex.: Estudar Python por 2 horas..." autocomplete="off" />
+        <div class="task-foot"><span>UMA COISA DE CADA VEZ</span><span id="taskSaved">SALVO AUTOMATICAMENTE</span></div>
+      </section>
+
+      <section class="glass-panel ambience-panel">
+        <div class="panel-heading ambience-heading"><div><span class="panel-kicker">SINTA O AMBIENTE</span><h2>Atmosfera</h2></div><button class="sound-master" id="masterSoundBtn" aria-label="Ativar ou desativar sons" title="Ativar ou desativar sons"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 5a9 9 0 0 1 0 14"/></svg></button></div>
+        <div class="scene-list" id="sceneList">
+          <button class="scene-option selected" data-scene="mountains"><span class="scene-thumb thumb-mountains"><span>⛰</span></span><span class="scene-name"><strong>Refúgio nas montanhas</strong><small>Vento • névoa • serenidade</small></span><span class="selected-check">✓</span></button>
+          <button class="scene-option" data-scene="rain"><span class="scene-thumb thumb-rain"><span>☂</span></span><span class="scene-name"><strong>Chuva na janela</strong><small>Chuva • trovões distantes</small></span><span class="selected-check">✓</span></button>
+          <button class="scene-option" data-scene="campfire"><span class="scene-thumb thumb-fire"><span>♨</span></span><span class="scene-name"><strong>Acampamento noturno</strong><small>Fogueira • floresta</small></span><span class="selected-check">✓</span></button>
+          <button class="scene-option" data-scene="forest"><span class="scene-thumb thumb-forest"><span>♧</span></span><span class="scene-name"><strong>Floresta silenciosa</strong><small>Árvores • vento leve</small></span><span class="selected-check">✓</span></button>
+        </div>
+        <div class="sound-divider"></div>
+        <div class="sound-heading"><span>CAMADAS SONORAS</span><span class="sound-note">AJUSTE A SUA PAZ</span></div>
+        <div class="sound-mix">
+          <div class="sound-row" data-sound="rain"><span class="sound-icon rain-icon"><svg viewBox="0 0 24 24"><path d="M7 16a4 4 0 1 1 .7-7.9A5.5 5.5 0 0 1 18 9a3.5 3.5 0 0 1-.5 7M8 19l-1 2m6-2-1 2m6-2-1 2"/></svg></span><div class="sound-info"><div><strong>Chuva</strong><output id="rainValue">35%</output></div><input aria-label="Volume da chuva" type="range" min="0" max="100" value="35" data-volume="rain" /></div></div>
+          <div class="sound-row" data-sound="wind"><span class="sound-icon wind-icon"><svg viewBox="0 0 24 24"><path d="M3 8h12a3 3 0 1 0-3-3M2 12h17a2.5 2.5 0 1 1-2.5 2.5M4 16h7a2 2 0 1 1-2 2"/></svg></span><div class="sound-info"><div><strong>Vento</strong><output id="windValue">20%</output></div><input aria-label="Volume do vento" type="range" min="0" max="100" value="20" data-volume="wind" /></div></div>
+          <div class="sound-row" data-sound="fire"><span class="sound-icon fire-icon"><svg viewBox="0 0 24 24"><path d="M12 22c4 0 7-3 7-7 0-3-2-5-4-7 0 3-2 4-2 4 0-5-4-8-4-8 1 5-4 7-4 12 0 3 3 6 7 6Z"/><path d="M12 22c-2 0-3-2-3-3s2-3 3-5c0 2 3 3 3 5s-1 3-3 3Z"/></svg></span><div class="sound-info"><div><strong>Fogueira</strong><output id="fireValue">15%</output></div><input aria-label="Volume da fogueira" type="range" min="0" max="100" value="15" data-volume="fire" /></div></div>
+          <div class="sound-row" data-sound="birds"><span class="sound-icon birds-icon"><svg viewBox="0 0 24 24"><path d="M2 15c4-7 7-7 10-3 3-4 6-4 10-1-4 0-6 2-8 5-3-2-7-2-12-1Z"/><path d="m14 12 2-4"/></svg></span><div class="sound-info"><div><strong>Floresta</strong><output id="birdsValue">12%</output></div><input aria-label="Volume da floresta" type="range" min="0" max="100" value="12" data-volume="birds" /></div></div>
+        </div>
+        <p class="audio-hint" id="audioHint">Clique em começar para ativar os sons ambientes.</p>
+      </section>
+      <section class="glass-panel spotify-panel" aria-labelledby="spotifyTitle">
+        <div class="panel-heading">
+          <div><span class="panel-kicker">MÚSICA PARA FOCAR</span><h2 id="spotifyTitle">Spotify</h2></div>
+          <span class="spotify-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.6 14.4a.75.75 0 0 1-1.03.25c-2.83-1.73-6.4-2.12-10.6-1.16a.75.75 0 1 1-.34-1.46c4.6-1.05 8.55-.6 11.72 1.34.35.22.46.68.25 1.03Zm1.37-3.05a.94.94 0 0 1-1.29.31c-3.24-1.99-8.18-2.57-12.01-1.4a.94.94 0 1 1-.55-1.8c4.38-1.33 9.82-.69 13.54 1.6.44.27.58.85.31 1.29Zm.12-3.18c-3.89-2.31-10.3-2.53-14.01-1.4a1.12 1.12 0 1 1-.65-2.14c4.26-1.29 11.34-1.04 15.82 1.62a1.12 1.12 0 0 1-1.16 1.92Z"/></svg>
+          </span>
+        </div>
+        <form id="spotifyForm" class="spotify-form">
+          <label for="spotifyUrlInput">Link de música, álbum ou playlist</label>
+          <input id="spotifyUrlInput" type="url" placeholder="https://open.spotify.com/playlist/..." autocomplete="url" required>
+          <button class="spotify-connect" type="submit">Conectar ao Spotify</button>
+        </form>
+        <p class="spotify-status" id="spotifyStatus" role="status" aria-live="polite">Cole um link do Spotify para ouvir aqui.</p>
+        <div class="spotify-player" id="spotifyPlayer" hidden>
+          <iframe id="spotifyFrame" title="Player do Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <button class="spotify-disconnect" id="spotifyDisconnectBtn" type="button" hidden>Desconectar player</button>
+      </section>
+      <div class="side-bottom"><span><span class="green-dot"></span> SEU ESPAÇO, SEU RITMO</span><button id="videoBtn" class="text-button">Configurar vídeo <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div>
+    </aside>
+  </main>
+
+  <footer class="footer"><span>DEEP FOCUS <i>·</i> RESPIRA. RECOMEÇA. CONTINUA.</span><span id="clock">--:--</span></footer>
+
+  <div class="modal-backdrop" id="settingsModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><button class="modal-close" data-close="settingsModal" aria-label="Fechar">×</button><span class="panel-kicker">PERSONALIZE A EXPERIÊNCIA</span><h2 id="settingsTitle">Configurações</h2><p>Defina a duração das sessões e personalize seu ambiente.</p>
+      <div class="settings-grid"><label>Tempo do Pomodoro (min)<input id="focusMinutes" type="number" min="1" max="180" value="25"></label><label>Pausa curta (min)<input id="shortMinutes" type="number" min="1" max="60" value="5"></label><label>Pausa longa (min)<input id="longMinutes" type="number" min="1" max="90" value="15"></label><label>Sessões por ciclo<input id="cycleSessions" type="number" min="2" max="8" value="4"></label></div>
+      <div class="background-settings">
+        <label class="video-label" for="videoUrlInput">Imagem ou vídeo por URL<input id="videoUrlInput" type="url" placeholder="https://site.com/imagem.webp ou link do YouTube" autocomplete="url"><small>Links de imagem, vídeo direto e YouTube. A origem precisa permitir carregamento ou incorporação.</small></label>
+        <div class="background-file-row">
+          <label class="file-choice">Escolher imagem<input id="backgroundImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif"></label>
+          <label class="file-choice">Escolher vídeo<input id="backgroundVideoFile" type="file" accept="video/*"></label>
+        </div>
+        <div class="background-preview" id="backgroundPreview" aria-live="polite">
+          <img id="backgroundPreviewImage" alt="Prévia da imagem" hidden>
+          <video id="backgroundPreviewVideo" muted loop playsinline hidden></video>
+          <iframe id="backgroundPreviewFrame" title="Prévia do vídeo do YouTube" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+          <p id="backgroundPreviewMessage">Nenhuma nova mídia selecionada.</p>
+        </div>
+        <p class="background-status" id="backgroundStatus" role="status">Fundo padrão ativo.</p>
+        <div class="background-actions">
+          <button class="btn-secondary" id="previewBackgroundBtn" type="button">Pré-visualizar URL</button>
+          <button class="btn-primary" id="applyBackgroundBtn" type="button" disabled>Aplicar fundo</button>
+          <button class="btn-secondary" id="restoreBackgroundBtn" type="button">Restaurar fundo padrão</button>
+        </div>
+        <small class="background-note">Arquivos locais são guardados neste navegador. Vídeos muito grandes podem exceder o armazenamento disponível.</small>
+      </div>
+      <div class="modal-actions"><button class="btn-secondary" data-close="settingsModal">Cancelar</button><button class="btn-primary" id="saveSettingsBtn">Salvar configurações</button></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
